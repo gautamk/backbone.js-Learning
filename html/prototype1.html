@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>Prototype 1</title>
+    <style type="text/css" media="screen">
+        .display-none{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/template" id="input-view-template" >
+        <label for="<%= id %>"><%= label %>:</label>
+        <input 
+            id="<%= id %>"
+            class="<%= className %>"
+            type="<%= type %>" 
+            name="<%= name %>" 
+            value="<%= value %>"
+            placeholder="<%= placeholder %>"
+        >
+    </script>
+    <div id="container-div" class="container">
+
+    </div><!-- /container-div -->
+
+
+    <div class="display-none">
+        <script type="text/javascript" src="../js/jquery-1.7.1.min.js" ></script>
+        <script type="text/javascript" src="../js/underscore-min.js" ></script>
+        <script type="text/javascript" src="../js/backbone-min.js" ></script>
+        <script type="text/javascript" src="../js/jasmine.js  " ></script>
+        <script type="text/javascript" src="../js/jasmine-html.js" ></script>
+        <script type="text/javascript" src="../js/prototype1.js" ></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/jasmine.css">
+    </div>
+</body>
+</html>
