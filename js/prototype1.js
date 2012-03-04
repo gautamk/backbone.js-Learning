@@ -1,79 +1,48 @@
 (function($){
     window.InputModel = Backbone.Model.extend({
         defaults:{
-            "type"          :"text",
-            "className"     :"",
-            "id"            :"",
-            "name"          :"",
-            "value"         :"",
-            "placeholder"   :"Enter Text",
-            "label"         :"Text",
+            type            :"text",
+            className       :"Default",
+            id              :"",
+            name            :"",
+            value           :"",
+            placeholder     :"Enter Text",
+            label           :"Text",
+            error           :"",
         }
     });
 
     window.InputView = Backbone.View.extend({
-        templateCode:$("#input-view-template").html(),
-        tagName:'span',
+        tagName         :'span',
+        className       :'backbone-input-container',
+        templateSelector:'#input-view-template',
         initialize:function(){
-            _.bindAll(this,"render");
+            _.bindAll(this,'render'); // Refer http://documentcloud.github.com/underscore/#bindAll
+            
+            this.template = _.template($(this.templateSelector).html());
             this.model.bind('change',this.render);
-            this.template = _.template(this.templateCode);
         },
         render:function(){
+            console.log("Reached Render",this.model.toJSON());
             var renderedContent = this.template(this.model.toJSON());
             this.$el.html(renderedContent);
-            this.className = this.model.get("className");
             return this;
-        },
-        input:function(){
-            return this.$el.children('input');
-        },
-        inputType:function(input_type){
-            if(input-type == undefined){
-                return this.model.get('type');
-            }
-            this.model.set('type',input_type);
-        },
-
-        /*
-            Returns if a check box or radio button is checked
-        */
-        isChecked:function(){
-
-            switch(this.model.get('type')){
-                case "radio"     :
-                case "checkbox"  :
-                    return this.input().is(':checked');
-                default:
-                    return false;
-            }
-        },
-        getValue:function(){
-            switch(this.model.get('value')){
-                default         :
-                case 'text'     :
-                case 'number'   :
-                case 'password' : return this.input().val();
-
-                case 'checkbox' :
-                case 'radio'    : return this.isChecked();
-            }
         }
     });
 
     $(document).ready(function(){
-        ipt = new InputModel ({
-            "type"          :"text",
-            "className"     :"ASd",
-            "id"            :"IDsomethign",
-            "name"          :"SomeName",
-            "value"         :"",
-            "placeholder"   :"Enter Text",
-            "label"         :"Text",
+        ipm = new InputModel ({
+            type          :"text",
+            class         :"ASd",
+            id            :"IDsomethign",
+            name          :"SomeName",
+            value         :"",
+            placeholder   :"Enter Some Text",
+            label         :"Text",
         });
         ipv = new InputView({
-            model:ipt,
+            model:ipm,
         });
-        $("#container-div").html(ipv.render().el);
+        $("#container-div").append(ipv.render().el);
     });
 })(jQuery);
