@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Prototype 1</title>
+    <style type="text/css" media="screen">
+        .display-none{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/template" id="input-view-template" >
+
+        <div class="control-group <%= container_className %>">
+            <label class="control-label" >
+                <%= label %>
+                <div class="controls">
+                    <input 
+                        type="<%= type %>" 
+                        class="<%= className %>" 
+                        id="<%= id %>"
+                        placeholder="<%= placeholder %>"
+                        name="<%= name %>"
+                        value="<%= value %>"
+                    >
+                    <p class="help-block"><%= error %></p>
+                </div>
+            </label>
+        </div>
+
+    </script>
+    <div id="container-div" class="container">
+        
+    </div><!-- /container-div -->
+
+
+    <div class="display-none">
+        <script type="text/javascript" src="../js/vendor/jquery-1.7.1.min.js" ></script>
+        <script type="text/javascript" src="../js/vendor/underscore-min.js" ></script>
+        <script type="text/javascript" src="../js/vendor/backbone-min.js" ></script>
+        <script type="text/javascript" src="../js/vendor/jasmine.js  " ></script>
+        <script type="text/javascript" src="../js/vendor/jasmine-html.js" ></script>
+        <script type="text/javascript" src="../js/inputModelView.js" ></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/jasmine.css">
+        <script>
+             $(document).ready(function(){
+                ipm = new InputModel ({
+                    type                :"button",
+                    className           :"btn",
+                    container_className :"success",
+                    id                  :"IDsomethign",
+                    name                :"SomeName",
+                    value               :"Submit",
+                    placeholder         :"Enter Some Text",
+                    label               :"Some Label",
+                    error               :"Some Error"
+                });
+                ipv = new InputView({
+                    model:ipm,
+                });
+                $("#container-div").append(ipv.render().el);
+            });
+        </script>
+    </div>
+</body>
+</html>
