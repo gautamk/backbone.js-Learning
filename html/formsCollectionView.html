@@ -1,4 +1,4 @@
-vendor/<html>
+<html>
 <head>
     <title></title>
     <style type="text/css" media="screen">
@@ -9,7 +9,33 @@ vendor/<html>
 </head>
 <body>
 
+    <div id="container-div" class="container">
+        
+    </div><!-- /container-div -->
 
+    <script type="text/template" id="input-view-template" >
+
+        <div class="control-group <%= container_className %>">
+            <label class="control-label" >
+                <%= label %>
+                <div class="controls">
+                    <input 
+                        type="<%= type %>" 
+                        class="<%= className %>" 
+                        id="<%= id %>"
+                        placeholder="<%= placeholder %>"
+                        name="<%= name %>"
+                        value="<%= value %>"
+                    >
+                    <p class="help-block"><%= error %></p>
+                </div>
+            </label>
+        </div>
+
+    </script>
+    <script type="text/template" id="form-input-view-template">
+        
+    </script>
     <div class="display-none">
         <script type="text/javascript" src="../js/vendor/jquery-1.7.1.min.js" ></script>
         <script type="text/javascript" src="../js/vendor/underscore-min.js" ></script>
@@ -20,8 +46,9 @@ vendor/<html>
 
         <script type="text/javascript" src="../js/inputModelView.js" ></script>
         <script type="text/javascript" src="../js/formsCollectionView.js" ></script>
-
-        
+        <script>
+           
+        </script>
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/jasmine.css">
     </div>

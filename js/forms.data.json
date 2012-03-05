@@ -1,0 +1,35 @@
+[
+    {
+        type                :"text",
+        className           :"",
+        container_className :"",
+        id                  :"form_email",
+        name                :"email",
+        value               :"",
+        placeholder         :"Enter your Email",
+        label               :"email",
+        error               :""
+    },
+    {
+        type                :"password",
+        className           :"",
+        container_className :"",
+        id                  :"form_password",
+        name                :"password",
+        value               :"",
+        placeholder         :"Enter your Password",
+        label               :"Password",
+        error               :""
+    },
+    {
+        type                :"submit",
+        className           :"btn ",
+        container_className :"",
+        id                  :"form_submit",
+        name                :"submit",
+        value               :"Login",
+        placeholder         :"",
+        label               :"",
+        error               :""
+    }
+]
