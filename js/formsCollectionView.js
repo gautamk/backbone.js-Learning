@@ -7,20 +7,21 @@
     });
     window.InputFormView = Backbone.View.extend({
       tagName: 'form',
-      attributes: {
-        method: 'post',
-        action: '',
-        id: "",
-        "class": ""
-      },
       templateSelector: "#form-input-view-template",
       generate: function(content) {
         if (content == null) content = "";
-        this.el = this.make(this.tagName, this.attributes, content);
-        this.$el = $(this.el);
+        console.log(this.attributes);
+        this.setElement(this.make(this.tagName, this.attributes, content));
         return this;
       },
       inititilize: function() {
+        if (this.attributes === null || this.attributes === void 0) {
+          this.attributes = {
+            method: 'post',
+            action: '',
+            "class": ""
+          };
+        }
         _.bindAll(this, 'render');
         this.collection.bind('reset', this.render);
         return this;
@@ -45,7 +46,12 @@
   });
 
   jQuery(function() {
-    window.inputForm = new InputForm();
+    window.inputForm = new InputForm({
+      attributes: {
+        method: "get",
+        "class": "form-inline"
+      }
+    });
     window.inputFormView = new InputFormView({
       collection: inputForm
     });

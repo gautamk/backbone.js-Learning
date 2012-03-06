@@ -6,19 +6,19 @@ jQuery ->
 
     window.InputFormView = Backbone.View.extend({
         tagName:'form'
-        attributes:{
-            method:'post'
-            action:''
-            id:""
-            class:""
-        }
         templateSelector:"#form-input-view-template"
         generate:(content="")->
-            @.el = @.make(@.tagName,@.attributes,content)
-            @$el=$(@el)
+            console.log @.attributes
+            @.setElement @.make(@.tagName,@.attributes,content)
             @
 
         inititilize:->
+            if @.attributes == null or @.attributes == undefined 
+                @.attributes = {
+                    method:'post'
+                    action:''
+                    class:""
+                } 
             _.bindAll @ , 'render'
             #@.template = _.template jQuery(templateSelector).html()
             @.collection.bind 'reset' , @.render
@@ -41,7 +41,12 @@ jQuery ->
     @
 
 jQuery ->
-    window.inputForm = new InputForm()
+    window.inputForm = new InputForm({
+        attributes:{
+            method:"get"
+            class:"form-inline"
+        }
+        })
     window.inputFormView = new InputFormView({collection:inputForm})
     inputForm.reset [
         {
