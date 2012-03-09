@@ -42,12 +42,27 @@ jQuery ->
         tagName         :'span'
         className       :'backbone-input-container'
         templateSelector:'#input-template'
+
+        # Called When the value attribute changes
+        valueChanged:() ->
+            console.log @.model.get('id'),@.$el.find("#"+@.model.get('id')).val()
+            @
         initialize:() ->
-            ### Refer http://documentcloud.github.com/underscore/#bindAll 
-            ###
+            #Refer http://documentcloud.github.com/underscore/#bindAll 
             _.bindAll @,'render' ; 
+
             @.template = _.template $(@.templateSelector).html();
             @.model.bind 'change',@.render;
+
+            events={
+
+            }
+
+            events["change #"+@.model.get('id')] = "valueChanged"
+
+            @.delegateEvents events
+            # return this
+            @
         
         render:() ->
             renderedContent = @.template @.model.toJSON();
@@ -55,5 +70,7 @@ jQuery ->
             # return this
             @
     })
+
+    
 
     @

@@ -46,11 +46,19 @@
       tagName: 'span',
       className: 'backbone-input-container',
       templateSelector: '#input-template',
+      valueChanged: function() {
+        console.log(this.model.get('id'), this.$el.find("#" + this.model.get('id')).val());
+        return this;
+      },
       initialize: function() {
-        /* Refer http://documentcloud.github.com/underscore/#bindAll
-        */        _.bindAll(this, 'render');
+        var events;
+        _.bindAll(this, 'render');
         this.template = _.template($(this.templateSelector).html());
-        return this.model.bind('change', this.render);
+        this.model.bind('change', this.render);
+        events = {};
+        events["change #" + this.model.get('id')] = "valueChanged";
+        this.delegateEvents(events);
+        return this;
       },
       render: function() {
         var renderedContent;
