@@ -47,7 +47,7 @@
       className: 'backbone-input-container',
       templateSelector: '#input-template',
       valueChanged: function() {
-        console.log(this.model.get('id'), this.$el.find("#" + this.model.get('id')).val());
+        this.model.attributes.value = this.$inputElement.val();
         return this;
       },
       initialize: function() {
@@ -64,6 +64,7 @@
         var renderedContent;
         renderedContent = this.template(this.model.toJSON());
         this.$el.html(renderedContent);
+        this.$inputElement = this.$el.find("#" + this.model.get('id'));
         return this;
       }
     });

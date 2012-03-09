@@ -45,18 +45,20 @@ jQuery ->
 
         # Called When the value attribute changes
         valueChanged:() ->
-            console.log @.model.get('id'),@.$el.find("#"+@.model.get('id')).val()
+            # Not using set method because that triggers an event 
+            # which might cause an infinite loop
+
+            @.model.attributes.value = @.$inputElement.val();
+            # return this
             @
         initialize:() ->
-            #Refer http://documentcloud.github.com/underscore/#bindAll 
-            _.bindAll @,'render' ; 
+            # Refer http://documentcloud.github.com/underscore/#bindAll 
+            _.bindAll @,'render' 
 
-            @.template = _.template $(@.templateSelector).html();
-            @.model.bind 'change',@.render;
+            @.template = _.template $(@.templateSelector).html()
+            @.model.bind 'change',@.render
 
-            events={
-
-            }
+            events={}
 
             events["change #"+@.model.get('id')] = "valueChanged"
 
@@ -67,6 +69,7 @@ jQuery ->
         render:() ->
             renderedContent = @.template @.model.toJSON();
             @.$el.html renderedContent;
+            @.$inputElement = @.$el.find("#"+@.model.get('id'));
             # return this
             @
     })
