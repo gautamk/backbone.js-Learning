@@ -13,21 +13,39 @@
         this.attributes.id = _.uniqueId('form_');
         return this;
       },
-      setMethod: function(method) {
+      isValidMethod: function(method) {
         switch (method.toLowerCase()) {
           case "get":
           case "post":
           case "put":
           case "delete":
-            break;
+            return true;
           default:
             return false;
         }
-        this.attributes.method = method.toLowerCase();
+      },
+      setMethod: function(method) {
+        if (isValidMethod(method) === true) {
+          this.attributes.method = method.toLowerCase();
+        }
         return this;
       },
       getMethod: function() {
         return this.attributes.method;
+      },
+      setClassName: function(className) {
+        if (className !== void 0) this.attributes.className = className;
+        return this;
+      },
+      getClassName: function() {
+        return this.attributes.className;
+      },
+      setAction: function(action) {
+        if (action !== void 0) this.attributes.action = action;
+        return this;
+      },
+      getAction: function() {
+        return this.attributes.action;
       }
     });
     window.FormView = Backbone.View.extend({

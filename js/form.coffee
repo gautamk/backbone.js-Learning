@@ -11,15 +11,30 @@ jQuery ->
         initialize:() ->
             @.attributes.id = _.uniqueId 'form_'
             @
-        setMethod:(method) ->
+
+        isValidMethod:(method) ->
             switch method.toLowerCase()
-                when "get","post","put","delete" then break
+                when "get","post","put","delete" then return true
                 else return false
-            @.attributes.method = method.toLowerCase()
+        setMethod:(method) ->
+            @.attributes.method = method.toLowerCase() if isValidMethod(method) is true
             @
         getMethod:() ->
             # return
-            @.attributes.method 
+            @.attributes.method
+        setClassName:(className) ->
+            @.attributes.className = className unless className is undefined
+            @
+        getClassName:() ->
+            # return
+            @.attributes.className
+        setAction:(action) ->
+            @.attributes.action = action unless action is undefined
+            @
+        getAction:() ->
+            # return
+            @.attributes.action
+
     })
 
     window.FormView = Backbone.View.extend({

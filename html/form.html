@@ -12,9 +12,9 @@
 
   <!-- template start -->
     <div class="control-group <%= container_className %>">
-      <label class="control-label" >
+      <label class="control-label <%= container_className %>" >
         <%= label %>
-        <div class="controls">
+        <div class="controls <%= container_className %>">
 
           <% if(tagName === 'input' ){ %>
             <<%= tagName %> 
@@ -60,12 +60,50 @@
 
         <script type="text/javascript">
           $(function(){
-            window.formCollection = new FormCollection();
+            window.formCollection = new FormCollection({}).setClassName('form-search');
             formCollection.reset([
-              {tagName:"input"},
-              {tagName:"textarea"}
+              {
+                tagName: 'input',
+                type: "text",
+                name: "name",
+                placeholder: "What is your name ?",
+                label: "Name",
+              },
+              {
+                tagName: 'input',
+                type: "radio",
+                className: "inline",
+                container_className: 'checkbox inline',
+                name: "gender",
+                value: "m",
+                label: "Male",
+              },
+              {
+                tagName: 'input',
+                type: "radio",
+                className: "inline",
+                container_className: 'checkbox inline',
+                name: "gender",
+                value: "f",
+                label: "Female",
+              },
+              {
+                tagName: 'textarea',
+                type: "text",
+                container_className: '',
+                name: "about",
+                placeholder: "Tell us a little bit about yourself",
+                label: "About you :",
+              },
+              {
+                type:"submit",
+                className:"btn btn-primary",
+                value:"submit"
+              }
             ]);
-            window.formView = new FormView({collection:formCollection});
+            window.formView = new FormView({
+              collection:formCollection,
+            });
             $("#container-div").append(window.formView.render().$el);
           });
         </script>

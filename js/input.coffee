@@ -1,15 +1,15 @@
 jQuery ->
     window.InputModel = Backbone.Model.extend({
         defaults:{
-            tagName             :'input'
+            tagName             :"input"
             type                :"text"
             className           :""
-            container_className :''
+            container_className :""
             id                  :""
             name                :""
             value               :""
-            placeholder         :"Enter Text"
-            label               :"Text"
+            placeholder         :""
+            label               :""
             error               :""
         }
 
@@ -36,7 +36,7 @@ jQuery ->
                 else return "Invalid tagName"
 
             switch attrs.type
-                when "text","radio","checkbox" then break
+                when "text","radio","checkbox","hidden" then break
                 else return "Invalid type"
 
             return @.customValidate attrs

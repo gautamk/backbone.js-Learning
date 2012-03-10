@@ -3,15 +3,15 @@
   jQuery(function() {
     window.InputModel = Backbone.Model.extend({
       defaults: {
-        tagName: 'input',
+        tagName: "input",
         type: "text",
         className: "",
-        container_className: '',
+        container_className: "",
         id: "",
         name: "",
         value: "",
-        placeholder: "Enter Text",
-        label: "Text",
+        placeholder: "",
+        label: "",
         error: ""
       },
       idAttribute: 'attributes.id',
@@ -36,6 +36,7 @@
           case "text":
           case "radio":
           case "checkbox":
+          case "hidden":
             break;
           default:
             return "Invalid type";
