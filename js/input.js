@@ -14,6 +14,7 @@
         label: "Text",
         error: ""
       },
+      idAttribute: 'attributes.id',
       initialize: function() {
         this.attributes.id = _.uniqueId('form_input_');
         return this;
@@ -46,18 +47,18 @@
       tagName: 'span',
       className: 'backbone-input-container',
       templateSelector: '#input-template',
+      events: {},
       valueChanged: function() {
         this.model.attributes.value = this.$inputElement.val();
+        console.log(this.$inputElement.val());
         return this;
       },
       initialize: function() {
-        var events;
         _.bindAll(this, 'render');
         this.template = _.template($(this.templateSelector).html());
         this.model.bind('change', this.render);
-        events = {};
-        events["change #" + this.model.get('id')] = "valueChanged";
-        this.delegateEvents(events);
+        this.events["change #" + this.model.get('id')] = "valueChanged";
+        this.delegateEvents();
         return this;
       },
       render: function() {
@@ -65,6 +66,8 @@
         renderedContent = this.template(this.model.toJSON());
         this.$el.html(renderedContent);
         this.$inputElement = this.$el.find("#" + this.model.get('id'));
+        console.log(this.$inputElement);
+        this.delegateEvents();
         return this;
       }
     });
